@@ -1,0 +1,23 @@
+<div>
+    <h2>File Upload</h2>
+    <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <input type="file" (change)="onFileSelected($event)">
+      <button type="submit">Upload</button>
+      <div *ngIf="uploadProgress !== null">
+        <p>Upload Progress: {{ uploadProgress }}%</p>
+        <progress value="{{ uploadProgress }}" max="100"></progress>
+      </div>
+    </form>
+  
+    <h2>File List</h2>
+    <ul>
+      <li *ngFor="let file of fileList">
+        <a [href]="file.url" download>{{ file.filename }}</a>
+        <span *ngIf="file.downloadProgress !== null">
+          Download Progress: {{ file.downloadProgress }}%
+          <progress value="{{ file.downloadProgress }}" max="100"></progress>
+        </span>
+        <button (click)="onDownload(file)">Download</button>
+      </li>
+    </ul>
+  </div>
